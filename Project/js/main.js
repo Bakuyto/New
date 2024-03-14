@@ -92,16 +92,13 @@ $(document).ready(function() {
             var noResultsMessage = '<tr><td colspan="' + $('#myTable th').length + '">No results found</td></tr>';
             $('#table-body').html(noResultsMessage);
         }
+        
+        // Reload the page when search input is cleared
+        if (searchText === '') {
+            location.reload();
+        }
     }
 
     // Bind the keyup event of the search input
     $('#searchInput').keyup(handleSearch);
-
-    // Reset the search filter when the search input is cleared
-    $('#searchInput').keyup(function() {
-        if ($(this).val() === '') {
-            // Restore original table rows
-            $('#table-body').html(originalTableRows);
-        }
-    });
 });
