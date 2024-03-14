@@ -14,7 +14,7 @@
 </head>
 <body>
 <div class="contain-fluid">
-<nav class=" sticky-top top-0" style="background-color:white; z-index:999;">
+<nav class="sticky-top top-0" style="background-color:white; z-index:999;">
       <ul>
         <li>
           <a class="active" href="#">Main</a>
@@ -28,9 +28,8 @@
       </ul>
     </nav>
       <div class="main-header px-3 sticky-top bg-light" style='top:60px;'>
-        <form class="d-flex">
-          <input class="form-control me-1 w-50" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-success" type="submit">Search</button>
+        <form class="d-flex" id="searchForm">
+          <input class="form-control me-1 w-100" type="search" id="searchInput" placeholder="Search by Name" aria-label="Search">
         </form>
         
         
@@ -66,7 +65,7 @@
                   while ($row = $result->fetch_assoc()) {
                       foreach ($row as $column_name => $value) {
                           $columnIndex++;
-                          if ($columnIndex == 3) continue; // Skip rendering the column at index 3
+                          if ($columnIndex == 3 || $columnIndex == 8) continue; // Skip rendering the column at index 3
                           echo "<th class='text-center'>" . $column_name . "</th>";
                       }
                       break; // Break after outputting column names of the first row
@@ -102,7 +101,7 @@
                     $columnIndex = 0;
                     foreach ($columns as $column) {
                         $columnIndex++;
-                        if ($columnIndex == 3) continue; // Skip rendering the column at index 3
+                        if ($columnIndex == 3 || $columnIndex == 8) continue; // Skip rendering the column at index 3
                         echo "<td>" . $row[$column] . "</td>";
                     }
                     // Add Edit and Delete buttons

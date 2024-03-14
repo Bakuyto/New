@@ -1,6 +1,6 @@
-$(document).ready(() => {
+$(document).ready(function() {
     // Define the filtering logic
-    $('#filter').on('click', () => {
+    $('#filter').on('click', function() {
         const rowLimit = $('#row').val();
         filterTable('myTable', rowLimit);
     });
@@ -8,10 +8,10 @@ $(document).ready(() => {
     const filterTable = (tableId, rowLimit) => {
         const $table = $('#' + tableId);
         const $rows = $table.find('tbody tr');
-    
+
         // Hide all tbody rows initially
         $rows.hide();
-    
+
         // Show only the specified number of tbody rows starting from index 0
         $rows.slice(0, parseInt(rowLimit)).show();
     };
@@ -26,11 +26,11 @@ $(document).ready(() => {
     const showPage = (page) => {
         // Hide all tbody rows
         $tbodyRows.hide();
-        
+
         // Calculate start and end indices for the current page
         const startIndex = (page - 1) * rowsPerPage;
         const endIndex = startIndex + rowsPerPage;
-        
+
         // Show only the tbody rows for the current page
         $tbodyRows.slice(startIndex, endIndex).show();
 
@@ -55,7 +55,7 @@ $(document).ready(() => {
         goToPage(currentPage + 1);
     });
 
-    $("#page-number").on("change", () => {
+    $("#page-number").on("change", function() {
         const pageNum = parseInt($(this).val());
         if (!isNaN(pageNum)) {
             goToPage(pageNum);
@@ -65,5 +65,43 @@ $(document).ready(() => {
     // Initial setup
     showPage(currentPage);
     $("#total-pages").text(totalPages);
-});
 
+    // Store the original table rows
+    var originalTableRows = $('#table-body').html();
+
+    // Function to handle search
+    function handleSearch() {
+        var searchText = $('#searchInput').val().toLowerCase();
+        var rowsToShow = 0;
+
+        // Loop through each table row
+        $('#myTable tbody tr').each(function() {
+            var rowText = $(this).text().toLowerCase();
+
+            // Check if the row contains the search text
+            if (searchText === '' || rowText.indexOf(searchText) !== -1) {
+                $(this).show(); // Show row if it matches search text or if search text is empty
+                rowsToShow++;
+            } else {
+                $(this).hide(); // Hide row if it doesn't match search text
+            }
+        });
+
+        // Show no results message if necessary
+        if (rowsToShow === 0 && searchText !== '') {
+            var noResultsMessage = '<tr><td colspan="' + $('#myTable th').length + '">No results found</td></tr>';
+            $('#table-body').html(noResultsMessage);
+        }
+    }
+
+    // Bind the keyup event of the search input
+    $('#searchInput').keyup(handleSearch);
+
+    // Reset the search filter when the search input is cleared
+    $('#searchInput').keyup(function() {
+        if ($(this).val() === '') {
+            // Restore original table rows
+            $('#table-body').html(originalTableRows);
+        }
+    });
+});
