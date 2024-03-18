@@ -1,20 +1,30 @@
 $(document).ready(function() {
-    // Define the filtering logic
-    $('#filter').on('click', function() {
-        const rowLimit = $('#row').val();
-        filterTable('myTable', rowLimit);
-    });
+// Define the filtering logic
+$('#filter').on('click', function() {
+    const rowLimit = $('#row').val();
+    // Check if rowLimit is empty, refresh the page if it is
+    if (!rowLimit) {
+        location.reload();
+        return;
+    }
+    filterTable('myTable', rowLimit);
+});
 
-    const filterTable = (tableId, rowLimit) => {
-        const $table = $('#' + tableId);
-        const $rows = $table.find('tbody tr');
+const filterTable = (tableId, rowLimit) => {
+    const $table = $('#' + tableId);
+    const $rows = $table.find('tbody tr');
 
-        // Hide all tbody rows initially
-        $rows.hide();
+    // Hide all tbody rows initially
+    $rows.hide();
 
-        // Show only the specified number of tbody rows starting from index 0
+    // Show only the specified number of tbody rows starting from index 0
+    if (rowLimit === '' || parseInt(rowLimit) === 0) {
+        // If rowLimit is empty or equal to 0, reload the page
+        location.reload();
+    } else {
         $rows.slice(0, parseInt(rowLimit)).show();
-    };
+    }
+};
 
     // Define the pagination logic
     const rowsPerPage = 12;
@@ -101,4 +111,46 @@ $(document).ready(function() {
 
     // Bind the keyup event of the search input
     $('#searchInput').keyup(handleSearch);
+
+
+// Function to handle click event of table cell for editing
+$("td.editable").on("click", function() {
+    // Check if the cell is not in the first column (assuming ID column is the first column)
+    if (!$(this).prev().length) {
+        return; // Exit the function if the cell is in the first column
+    }
+    
+    var oldValue = $(this).text();
+    var productId = $(this).closest("tr").attr("id");
+    var column = $(this).attr("data-column");
+    var newValue = prompt("Enter new value:", oldValue);
+
+    if (newValue != null && newValue !== oldValue) {
+        var self = $(this);
+        $.ajax({
+            url: "update.php",
+            type: "POST",
+            data: { id: productId, column: column, newValue: newValue },
+            dataType: "json", // Specify the expected data type
+            success: function(response) {
+                console.log("AJAX Success:", response);
+                if (response.success) {
+                    self.text(newValue);
+                    // alert(response.message);
+                    console.log("Reloading page...");
+                    window.location.reload(); // Reload the page after a successful update
+                } else {
+                    console.error("Update failed:", response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX Error:", error);
+            }
+        });
+    }
+});
+
+
+
+
 });
