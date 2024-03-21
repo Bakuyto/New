@@ -52,4 +52,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit_input"])) {
     // Close the database connection
     $conn->close();
 }
-?>

@@ -1,7 +1,4 @@
-function setTransactionToDelete(transactionName) {
-    document.getElementById('transactionToDelete').value = transactionName;
-    }
- document.querySelectorAll('.plus-btn').forEach(button => {
+document.querySelectorAll('.plus-btn').forEach(button => {
         button.addEventListener('click', function () {
           var departmentName = this.getAttribute('data-department-name');
           var modalTitle = document.querySelector('#exampleModal .modal-title');

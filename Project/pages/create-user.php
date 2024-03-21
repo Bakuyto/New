@@ -387,7 +387,7 @@
         </div>
         <div class="modal-body">
           <p>Are you sure you want to delete this transaction?</p>
-          <form action="delete-column.php" id="deleteTransactionForm" class="d-flex justify-content-center" method="POST">
+          <form id="deleteTransactionForm" action="delete-column.php" class="d-flex justify-content-center" method="POST">
             <input type="hidden" name="transactionToDelete" id="transactionToDelete">
             <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Cancel</button>
             <button type="submit" name="submit_delete_transaction" class="btn btn-danger">Delete</button>
@@ -438,6 +438,12 @@
       $('#updateModal').modal('show'); // Show the modal
     });
   });
+</script>
+<script>
+  function setTransactionToDelete(transactionName) {
+    console.log("Transaction Name:", transactionName);
+    document.getElementById('transactionToDelete').value = transactionName;
+  }
 </script>
 
 </html>
