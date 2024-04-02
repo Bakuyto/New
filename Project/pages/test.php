@@ -10,7 +10,7 @@
 </head>
 <body>
   
-<nav>
+<nav class="sticky-top top-0 border" style="background-color:white; z-index:999;">
       <ul>
         <li>
           <a href="main.php">Main</a>

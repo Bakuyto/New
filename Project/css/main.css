@@ -36,7 +36,7 @@ a:is(:link,:active,:visited).active{
   justify-content: space-between;
   align-items: center;
   border: 1px solid var(--grey);
-}
+} 
 
 .tbl-container{
   max-width: fit-content;
@@ -45,7 +45,7 @@ a:is(:link,:active,:visited).active{
 .table-container,.tbl-fixed{
   overflow-y: scroll;
   height: fit-content;
-  max-height: 80vh;
+  max-height: 75vh;
 }
 
 
@@ -64,7 +64,6 @@ min-width: max-content;
 border-collapse: separate;
 }
 th, td {
-border: 1px solid black;
 padding: 8px;
 text-align: left;
 }

@@ -18,8 +18,8 @@
 
 <body>
 
-  <div class="conatiner_fluid">
-    <nav class=" sticky-top top-0" style="background-color:white; z-index:999;">
+  <div class="conatiner_fluid" >
+    <nav class=" sticky-top top-0 border" style="background-color:white; z-index:999;">
       <ul>
         <li>
           <a href="main.php">Main</a>
@@ -34,8 +34,8 @@
     </nav>
 
     <div class="container-fluid">
-      <div class="row m-auto border text-center">
-        <div class="box1 col-sm-12 col-lg-4 border">
+      <div class="row m-auto text-center">
+        <div class="box1 col-sm-12 col-lg-4 ">
           <div class="box-header">
             <div class="h1 mt-5">New Department</div>
             <form method="POST" action="insert-department.php">
@@ -146,7 +146,7 @@
           </div>
         </div>
 
-        <div class="box3 col-sm-12 col-lg-4 border">
+        <div class="box3 col-sm-12 col-lg-4">
           <div class="h1 mt-5">New User</div>
               <form method="POST" action="insert-user.php">
           <div class="form-group">
